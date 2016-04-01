@@ -1,0 +1,11 @@
+<%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+
+<h3>Team You Belong To</h3>
+<% @team.each do |team| %>
+  <li>
+    <form action ="/chat/show" method="get">
+      <input type="hidden" name="team" value=<%=team.id%>>
+      <input type="submit" value="<%=team.teamname%>">
+    </form>
+  </li>
+<% end %>

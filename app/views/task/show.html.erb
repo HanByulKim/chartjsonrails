@@ -1,0 +1,25 @@
+<h4>너가 시킨 일</h4>
+<% @tasksend.each do |tasksend| %>
+  <li>
+    <p>name = <%=tasksend.taskname%></p>
+    <p>due = <%=tasksend.duedate%></p>
+    <p>완성도 = <%=tasksend.wansungdo%></p>
+    <% tasksend.users.each do |user| %>
+      <p>하는사람 = <%=user.email%></p>
+    <% end %>
+  </li>
+<% end %>
+
+<h4>너가 할 일</h4>
+<% @taskdo.each do |taskdo| %>
+  <li>
+    <p>name = <%=taskdo.taskname%></p>
+    <p>
+      시킨놈 =
+      <%sender = User.find(taskdo.sender)%>
+      <%=sender.email%>
+    </p>
+    <p>due = <%=taskdo.duedate%></p>
+    <p>완성도 = <%=taskdo.wansungdo%></p>
+  </li>
+<% end %>
