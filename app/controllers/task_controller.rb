@@ -20,8 +20,10 @@ class TaskController < ApplicationController
   end
   
   def entire
-      @managelist = Task.order(duedate: :asc)
-      @managelistdesc = Task.order(duedate: :desc)
+    @taskall = Task.all
+    @managelist = @taskall.where(:team_id => params[:team]).order(duedate: :asc)
+    @managelistdesc = @taskall.where(:team_id => params[:team]).order(duedate: :desc)
+    
   end
   
   def wansungdo_update

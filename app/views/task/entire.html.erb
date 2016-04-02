@@ -1,22 +1,15 @@
 <head>
 	<h1> Entire task viewer </h1>
 	<h2> <%=current_user.first_name%><%=current_user.last_name%> <%=current_user.email%> </h2>
-	<%= link_to("Individual", {:action => "index"}) %>
+	<% @managelist.each do |b| %>
+	<%= link_to 'Individual', { controller: :task, action: :show, team: b.team_id } %>
+	<% end %>
 </head>
 
-  <script src="/assets/Chart.js"></script>
-<body data-no-turbolink="true">
-  
+<body>
 	<% @managelist.each_with_index do |t| %>
-	    <% a = User.find(t.user_id) %>
-		<li> <%=a.first_name%><%=a.last_name%> <%=t.taskname%> <%=t.duedate%> </li>
+		<li> <%=t.taskname%> <%=t.duedate%> </li>
 	<% end %>
-	<br>
-	<form action="/task/enroll">
-		<textarea name="irum" placeholder="taskname"></textarea>
-		<textarea name="nalzza" placeholder="duedate"></textarea><br>
-		<input type="submit">
-	</form>
 	<br>
 	<li> <%= link_to('Logout', destroy_user_session_path, :method => :delete) %> </li>
 	
@@ -35,7 +28,7 @@
     		}
 		<% end %>
 
-	  	onld(barChartData);
+	  	onld(barChartData,displayday);
 	</script>
 	
 	<canvas id="canvas" width="auto" height="auto"></canvas>

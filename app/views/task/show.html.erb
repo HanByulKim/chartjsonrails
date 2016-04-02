@@ -1,7 +1,11 @@
 <head>
 	<h1> task viewer </h1>
 	<h2> <%=current_user.first_name%><%=current_user.last_name%> <%=current_user.email%> </h2>
-	<a href="/task/entire"> entire </a>
+	<% @taskdo.each do |b| %>
+	<%= link_to 'Entire', { controller: :task, action: :entire, team: b.team_id } %>
+	<% end %>
+	
+	
 </head>
 
 <h4>너가 시킨 일</h4>
@@ -26,6 +30,7 @@
     <form action="/task/wansungdo_update" method="post">
     	<input type="hidden" name="task_id" value="<%=taskdo.id%>">
     	<input type="hidden" name="team_id" value="<%=taskdo.team_id%>">
+    	
     	<textarea name="wansungdo"> <%= taskdo.wansungdo %> </textarea>
     	<%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
 
@@ -60,8 +65,6 @@
 
 	  	onld(barChartData);
 	</script>
-	<script src="/assets/Chart.js"></script>
 
 	<canvas id="canvas" width="auto" height="auto" style="max-width: 1200px; max-height: 500px;" ></canvas>
-
 </body>

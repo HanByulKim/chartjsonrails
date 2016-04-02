@@ -16,13 +16,15 @@ function first(labelString, dataString){
   	return barChartData;
 };
 
-function onld(barChartData){
-    window.onload = function(){
+function onld(barChartData,displayday){
+    $(document).ready(function(){
   		var ctx = document.getElementById("canvas").getContext("2d");
     	var chart = new Chart(ctx).HorizontalBar(barChartData, {
-  			responsive: true,
   			scaleFontSize: 17,
-  			tooltipEvents: ["mousemove", "touchstart", "touchmove"]
+  			tooltipEvents: ["mousemove", "touchstart", "touchmove"],
+  			showScale: true,
+  			scaleLineWidth: 5
+  			//scaleLabel: displayday
   		});
-  	};
+  	});
 };
