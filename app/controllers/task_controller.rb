@@ -9,10 +9,18 @@ class TaskController < ApplicationController
       redirect_to action: 'show', controller: 'chat', team: params[:team]
     end
   end
+  
   def show
     task1 = Task.where(:sender => current_user.id)
     @tasksend = task1.where(:team_id => params[:team])
     task2 = current_user.tasks
     @taskdo = task2.where(:team_id => params[:team])
+    @tasklist = @taskdo.order(duedate: :asc)
+    @tasklistdesc = @taskdo.order(duedate: :desc)
+  end
+  
+  def entire
+      @managelist = Task.order(duedate: :asc)
+      @managelistdesc = Task.order(duedate: :desc)
   end
 end

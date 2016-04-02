@@ -2,7 +2,7 @@ class CreateTasks < ActiveRecord::Migration
   def change
     create_table :tasks do |t|
       t.text :taskname
-      t.string :duedate
+      t.date :duedate
       t.integer :sender
       t.integer :wansungdo
       t.integer :team_id

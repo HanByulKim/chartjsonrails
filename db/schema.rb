@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160331105121) do
+ActiveRecord::Schema.define(version: 20160401144838) do
 
   create_table "chats", force: :cascade do |t|
     t.text     "title"
@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 20160331105121) do
 
   create_table "tasks", force: :cascade do |t|
     t.text     "taskname"
-    t.string   "duedate"
+    t.date     "duedate"
     t.integer  "sender"
     t.integer  "wansungdo"
     t.integer  "team_id"
@@ -81,6 +81,8 @@ ActiveRecord::Schema.define(version: 20160331105121) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "first_name"
+    t.string   "last_name"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

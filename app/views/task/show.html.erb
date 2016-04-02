@@ -1,9 +1,12 @@
+<head>
+	<h1> task viewer </h1>
+	<h2> <%=current_user.first_name%><%=current_user.last_name%> <%=current_user.email%> </h2>
+	<a href="/task/entire"> entire </a>
+</head>
+
 <h4>너가 시킨 일</h4>
 <% @tasksend.each do |tasksend| %>
-  <li>
-    <p>name = <%=tasksend.taskname%></p>
-    <p>due = <%=tasksend.duedate%></p>
-    <p>완성도 = <%=tasksend.wansungdo%></p>
+  <li> name = <%=tasksend.taskname%> due = <%=tasksend.duedate%> 완성도 = <%=tasksend.wansungdo%>
     <% tasksend.users.each do |user| %>
       <p>하는사람 = <%=user.email%></p>
     <% end %>
@@ -23,3 +26,34 @@
     <p>완성도 = <%=taskdo.wansungdo%></p>
   </li>
 <% end %>
+
+
+  <script src="/assets/Chart.js"></script>
+<body data-no-turbolink="true" >
+	<% @tasklist.each_with_index do |t| %>
+		<li> <%=t.taskname%> <%=t.duedate%> <%=t.wansungdo%></li>
+	<% end %>
+	<br>
+	<br>
+	<li> <%= link_to('Logout', destroy_user_session_path, :method => :delete) %> </li>
+	<!--<script src="/assets/tasklist_index.js"></script>-->
+	<script>
+	
+	    var labelString = new Array();
+		var dataString = new Array();
+		var barChartData = first(labelString, dataString);
+		
+		<% @tasklistdesc.each_with_index do |t| %>
+    		var displayday = <%=(t.duedate - Date.today).to_i %>
+    		if(displayday >= 0){
+				barChartData.labels.push("<%=t.taskname%>");
+	    		dataString.push(displayday);
+    		}
+		<% end %>
+
+	  	onld(barChartData);
+	</script>
+	
+	<canvas id="canvas" width="auto" height="auto" style="max-width: 1200px; max-height: 500px;" ></canvas>
+
+</body>
