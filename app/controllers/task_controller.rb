@@ -23,4 +23,12 @@ class TaskController < ApplicationController
       @managelist = Task.order(duedate: :asc)
       @managelistdesc = Task.order(duedate: :desc)
   end
+  
+  def wansungdo_update
+    @task = Task.find(params[:task_id])
+    @task.wansungdo = params[:wansungdo]
+    if @task.save
+      redirect_to action: 'show', team: params[:team_id]
+    end
+  end
 end

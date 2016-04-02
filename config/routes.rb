@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   post '/task/create' => 'task#create'
   get '/task/show' => 'task#show'
   post '/team/create' => 'team#create'
+  post '/task/wansungdo_update' => 'task#wansungdo_update'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

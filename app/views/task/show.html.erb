@@ -23,12 +23,18 @@
       <%=sender.email%>
     </p>
     <p>due = <%=taskdo.duedate%></p>
-    <p>완성도 = <%=taskdo.wansungdo%></p>
+    <form action="/task/wansungdo_update" method="post">
+    	<input type="hidden" name="task_id" value="<%=taskdo.id%>">
+    	<input type="hidden" name="team_id" value="<%=taskdo.team_id%>">
+    	<textarea name="wansungdo"> <%= taskdo.wansungdo %> </textarea>
+    	<%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
+
+    	<input type="submit" value="수정">
+    </form>
   </li>
 <% end %>
 
 
-  <script src="/assets/Chart.js"></script>
 <body data-no-turbolink="true" >
 	<% @tasklist.each_with_index do |t| %>
 		<li> <%=t.taskname%> <%=t.duedate%> <%=t.wansungdo%></li>
@@ -39,7 +45,8 @@
 	<!--<script src="/assets/tasklist_index.js"></script>-->
 	<script>
 	
-	    var labelString = new Array();
+	
+	  var labelString = new Array();
 		var dataString = new Array();
 		var barChartData = first(labelString, dataString);
 		
@@ -53,7 +60,8 @@
 
 	  	onld(barChartData);
 	</script>
-	
+	<script src="/assets/Chart.js"></script>
+
 	<canvas id="canvas" width="auto" height="auto" style="max-width: 1200px; max-height: 500px;" ></canvas>
 
 </body>
